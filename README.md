@@ -8,13 +8,21 @@ python -m kaslcred [schema_dir] [output_dir] [schema_map_file.json]
 
 # Example:
 # Requires having pre-written and pre-copied all of the schema files into ${KASL_HOME}/schemas
+# and having created ${KASL_HOME}/schemas and schema_map.json.
+# For an example of schema map file, have a look at sample_schemas/single_schema_map.json
 export KASL_HOME=${HOME}/.kasl
 python -m kaslcred ${KASL_HOME}/schemas ${KASL_HOME}/results ${KASL_HOME}/schemas/schema_map.json
+python -m kaslcred /data/schemas /data/results /data/schemas/schema_map.json
 ```
 
 ## Installation
 
 ### Docker
+
+Run `docker build -t kaslcred .`
+docker run -v .:/data -it kaslcred
+`python -m kaslcred /data/schemas /data/results /data/schemas/schema_map.json`
+
 
 ### Manual Local Installation
 1. Install Python

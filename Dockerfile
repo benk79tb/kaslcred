@@ -18,8 +18,17 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 # ENV PATH $POETRY_ROOT/bin:$PATH
 # ENV PATH $CARGO_ROOT/bin:$PATH
 
-run export PATH="$HOME/.cargo/bin:$PATH" && python3 -m pip install keri==0.6.8
+RUN export PATH="$HOME/.cargo/bin:$PATH" && python3 -m pip install keri==0.6.8
+RUN pip install build twine
 
-WORKDIR /keri
+# Install kaslcred
+COPY . /kaslcred
+
+RUN cd /kaslcred && python3 -m pip install .
+
+
+RUN mkdir /data
+WORKDIR /data
 
 # RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+ENTRYPOINT [ "/bin/bash" ]
